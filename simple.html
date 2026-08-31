@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Simple View | Computer Networks — DSSSB TGT</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* =========================
+       SIMPLE VIEW PAGE
+    ========================== */
+
+    .simple-page {
+      max-width: 1250px;
+      margin: 0 auto;
+      padding: 28px 4vw 60px;
+    }
+
+    .simple-header {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+      margin-bottom: 18px;
+    }
+
+    .simple-header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    .simple-kicker {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+    }
+
+    .simple-header h2 {
+      margin: 6px 0 8px;
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+    }
+
+    .simple-header p {
+      max-width: 800px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .simple-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .simple-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      background: var(--soft);
+      color: var(--ink);
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .simple-btn.primary {
+      background: var(--nav);
+      color: #fff;
+      border-color: var(--nav);
+    }
+
+    /* Search */
+    .simple-search-wrap {
+      margin-top: 18px;
+    }
+
+    .simple-search {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--bg);
+      color: var(--ink);
+      outline: none;
+      font-size: 13px;
+    }
+
+    .simple-search:focus {
+      border-color: #7aa7f4;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+    }
+
+    /* Unit */
+    .simple-unit {
+      --accent: #2563eb;
+      --unit-bg: #eef5ff;
+
+      background: var(--unit-bg);
+      border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line));
+      border-left: 5px solid var(--accent);
+      border-radius: 18px;
+      margin: 14px 0;
+      padding: 20px;
+      box-shadow: 0 7px 22px rgba(20, 32, 50, 0.045);
+    }
+
+    .simple-unit.hidden {
+      display: none;
+    }
+
+    .simple-unit-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 14px;
+    }
+
+    .simple-unit-label {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      font-weight: 900;
+      color: var(--accent);
+    }
+
+    .simple-unit h3 {
+      margin: 4px 0 0;
+      font-size: 20px;
+      line-height: 1.15;
+    }
+
+    .simple-unit-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 10px;
+      border-radius: 9px;
+      color: var(--accent);
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--line));
+      font-size: 11px;
+      font-weight: 850;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    /* Topics */
+    .simple-topics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 28px;
+    }
+
+    .simple-topic {
+      padding: 9px 0;
+      min-width: 0;
+    }
+
+    .simple-topic-title {
+      font-weight: 900;
+      font-size: 13px;
+      color: var(--ink);
+      line-height: 1.35;
+    }
+
+    .simple-topic ul {
+      margin: 5px 0 0;
+      /*padding-left: 20px; */
+    }
+
+    .simple-topic li {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+      margin: 3px 0;
+    }
+
+    .simple-topic li::marker {
+      color: var(--accent);
+    }
+
+    /* Unit-specific colors */
+    .unit-1 {
+      --accent: #2563eb;
+      --unit-bg: #eef5ff;
+    }
+
+    .unit-2 {
+      --accent: #16a34a;
+      --unit-bg: #effaf3;
+    }
+
+    .unit-3 {
+      --accent: #8b5cf6;
+      --unit-bg: #f5f1ff;
+    }
+
+    .unit-4 {
+      --accent: #f59e0b;
+      --unit-bg: #fff8e9;
+    }
+
+    .unit-5 {
+      --accent: #ef4444;
+      --unit-bg: #fff1f1;
+    }
+
+    .unit-6 {
+      --accent: #0891b2;
+      --unit-bg: #eefbfe;
+    }
+
+    .unit-7 {
+      --accent: #ec4899;
+      --unit-bg: #fff0f8;
+    }
+
+    .unit-8 {
+      --accent: #a16207;
+      --unit-bg: #fff9e9;
+    }
+
+    /* Dark mode readability */
+    body.dark .simple-unit-link {
+      background: rgba(0, 0, 0, 0.08);
+    }
+
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--muted);
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .no-results.show {
+      display: block;
+    }
+
+
+    /* =========================================
+   SIMPLE VIEW ONLY — LIGHTER COLORS
+========================================= */
+
+.simple-unit {
+  background: var(--unit-bg);
+}
+
+
+/* Unit 1 */
+.unit-1 {
+  --accent: #5b8fe8;
+  --unit-bg: #f6f9ff;
+}
+
+/* Unit 2 */
+.unit-2 {
+  --accent: #63b982;
+  --unit-bg: #f5fbf7;
+}
+
+/* Unit 3 */
+.unit-3 {
+  --accent: #967bdc;
+  --unit-bg: #f9f7ff;
+}
+
+/* Unit 4 */
+.unit-4 {
+  --accent: #dfb65c;
+  --unit-bg: #fffdf7;
+}
+
+/* Unit 5 */
+.unit-5 {
+  --accent: #df8585;
+  --unit-bg: #fff9f9;
+}
+
+/* Unit 6 */
+.unit-6 {
+  --accent: #60adbf;
+  --unit-bg: #f5fcfd;
+}
+
+/* Unit 7 */
+.unit-7 {
+  --accent: #da80ad;
+  --unit-bg: #fff9fc;
+}
+
+/* Unit 8 */
+.unit-8 {
+  --accent: #b59659;
+  --unit-bg: #fffcf6;
+}
+
+
+/* =========================================
+   SIMPLE VIEW — MORE PROMINENT TEXT
+========================================= */
+
+.simple-unit h3 {
+  font-size: 21px;
+  font-weight: 850;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.simple-topic-title {
+  font-size: 14px;
+  font-weight: 850;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.simple-topic li {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.5;
+  margin: 4px 0;
+}
+
+.simple-topic li::marker {
+  color: var(--accent);
+}
+
+.simple-unit-label {
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.simple-unit-link {
+  font-weight: 850;
+}
+
+
+/* Slightly clearer separation */
+.simple-topic {
+  padding: 10px 4px;
+}
+
+.simple-unit {
+  border-left-width: 4px;
+  box-shadow: 0 5px 18px rgba(20, 32, 50, 0.035);
+}
+
+
+
+    /* Responsive */
+    @media (max-width: 850px) {
+      .simple-header-top {
+        flex-direction: column;
+      }
+
+      .simple-topics {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .simple-page {
+        padding: 18px 16px 45px;
+      }
+
+      .simple-header {
+        padding: 20px;
+      }
+
+      .simple-unit {
+        padding: 16px;
+      }
+
+      .simple-unit-head {
+        flex-direction: column;
+      }
+
+      .simple-unit-link {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       NAVBAR
+  ========================== -->
+  <header class="topbar">
+
+    <div class="brand">
+      <div class="mark">CN</div>
+
+      <div>
+        <div class="eyebrow">DSSSB TGT COMPUTER SCIENCE</div>
+        <h1>Computer Networks</h1>
+      </div>
+    </div>
+
+    <div class="top-actions">
+
+      <a href="index.html" class="back-btn">
+        ← Home
+      </a>
+
+      <button class="icon-btn" id="themeToggle">
+        ☾
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       MAIN
+  ========================== -->
+  <main class="simple-page">
+
+    <!-- Header -->
+    <section class="simple-header">
+
+      <div class="simple-header-top">
+
+        <div>
+          <div class="simple-kicker">
+            QUICK REVISION / SIMPLE VIEW
+          </div>
+
+          <h2>
+            Computer Networks
+          </h2>
+
+          <p>
+            All 8 units in a simple outline format.
+            Use this page for fast revision and quickly jump
+            to the detailed page of any unit.
+          </p>
+        </div>
+
+        <div class="simple-actions">
+
+          <a href="index.html" class="simple-btn">
+            ← Home
+          </a>
+
+          <button
+            class="simple-btn primary"
+            id="printBtn"
+          >
+            Print
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- Search -->
+      <div class="simple-search-wrap">
+
+        <input
+          type="search"
+          id="simpleSearch"
+          class="simple-search"
+          placeholder="Search a topic or subtopic..."
+          autocomplete="off"
+        />
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         UNIT 1
+    ========================== -->
+
+    <section class="simple-unit unit-1">
+
+      <div class="simple-unit-head">
+
+        <div>
+          <span class="simple-unit-label">
+            UNIT 01
+          </span>
+
+          <h3>
+            UNIT 1 — NETWORK FUNDAMENTALS
+          </h3>
+        </div>
+
+        <a
+          href="unit1.html"
+          class="simple-unit-link"
+        >
+          Open Unit 1 →
+        </a>
+
+      </div>
+
+
+      <div class="simple-topics">
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">
+            1. Computer Network Basics
+          </div>
+
+          <ul>
+            <li>Definition</li>
+            <li>Objectives</li>
+            <li>Advantages</li>
+            <li>Applications</li>
+            <li>Network Components</li>
+          </ul>
+        </div>
+
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">
+            2. Types of Networks
+          </div>
+
+          <ul>
+            <li>PAN</li>
+            <li>LAN</li>
+            <li>MAN</li>
+            <li>WAN</li>
+          </ul>
+        </div>
+
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">
+            3. Network Topologies
+          </div>
+
+          <ul>
+            <li>Bus</li>
+            <li>Star</li>
+            <li>Ring</li>
+            <li>Mesh</li>
+            <li>Tree</li>
+            <li>Hybrid</li>
+            <li>Advantages / disadvantages</li>
+          </ul>
+        </div>
+
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">
+            4. Transmission Modes
+          </div>
+
+          <ul>
+            <li>Simplex</li>
+            <li>Half Duplex</li>
+            <li>Full Duplex</li>
+          </ul>
+        </div>
+
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">
+            5. Networking Models
+          </div>
+
+          <ul>
+            <li>OSI Model</li>
+            <li>7 Layers</li>
+            <li>Functions of each layer</li>
+            <li>TCP/IP Model</li>
+            <li>OSI vs TCP/IP</li>
+          </ul>
+        </div>
+
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">
+            6. Networking Devices
+          </div>
+
+          <ul>
+            <li>Repeater</li>
+            <li>Hub</li>
+            <li>Bridge</li>
+            <li>Switch</li>
+            <li>Router</li>
+            <li>Gateway</li>
+            <li>Modem</li>
+            <li>Access Point</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================
+         UNIT 2
+    ========================== -->
+
+    <section class="simple-unit unit-2">
+
+      <div class="simple-unit-head">
+
+        <div>
+          <span class="simple-unit-label">
+            UNIT 02
+          </span>
+
+          <h3>
+            UNIT 2 — DATA COMMUNICATION & TRANSMISSION
+          </h3>
+        </div>
+
+        <a href="unit2.html" class="simple-unit-link">
+          Open Unit 2 →
+        </a>
+
+      </div>
+
+
+      <div class="simple-topics">
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">
+            1. Data Communication Basics
+          </div>
+
+          <ul>
+            <li>Data</li>
+            <li>Signal</li>
+            <li>Sender</li>
+            <li>Receiver</li>
+            <li>Medium</li>
+            <li>Protocol</li>
+          </ul>
+        </div>
+
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">
+            2. Signals
+          </div>
+
+          <ul>
+            <li>Analog</li>
+            <li>Digital</li>
+            <li>Periodic</li>
+            <li>Non-periodic</li>
+          </ul>
+        </div>
+
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">
+            3. Transmission Media
+          </div>
+
+          <ul>
+            <li>Twisted Pair</li>
+            <li>Coaxial Cable</li>
+            <li>Optical Fiber</li>
+            <li>Radio Waves</li>
+            <li>Microwave</li>
+            <li>Infrared</li>
+            <li>Satellite</li>
+            <li>Wired vs Wireless</li>
+          </ul>
+        </div>
+
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">
+            4. Data Transmission
+          </div>
+
+          <ul>
+            <li>Serial</li>
+            <li>Parallel</li>
+            <li>Synchronous</li>
+            <li>Asynchronous</li>
+          </ul>
+        </div>
+
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">
+            5. Performance Measures
+          </div>
+
+          <ul>
+            <li>Bandwidth</li>
+            <li>Throughput</li>
+            <li>Latency</li>
+            <li>Propagation Delay</li>
+            <li>Transmission Delay</li>
+            <li>Jitter</li>
+          </ul>
+        </div>
+
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">
+            6. Error Detection & Correction
+          </div>
+
+          <ul>
+            <li>Parity</li>
+            <li>VRC</li>
+            <li>LRC</li>
+            <li>Checksum</li>
+            <li>CRC</li>
+            <li>Hamming Code</li>
+            <li>Error detection vs correction</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================
+         UNIT 3
+    ========================== -->
+
+    <section class="simple-unit unit-3">
+
+      <div class="simple-unit-head">
+
+        <div>
+          <span class="simple-unit-label">
+            UNIT 03
+          </span>
+
+          <h3>
+            UNIT 3 — DATA LINK LAYER
+          </h3>
+        </div>
+
+        <a href="unit3.html" class="simple-unit-link">
+          Open Unit 3 →
+        </a>
+
+      </div>
+
+
+      <div class="simple-topics">
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">1. Framing</div>
+          <ul>
+            <li>Framing</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">2. Flow Control</div>
+          <ul>
+            <li>Flow Control</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">3. Error Control</div>
+          <ul>
+            <li>Error Control</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">4. MAC / LLC Basics</div>
+          <ul>
+            <li>MAC / LLC basics</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">5. MAC Address</div>
+          <ul>
+            <li>MAC Address</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">6. Ethernet</div>
+          <ul>
+            <li>Ethernet</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">7. CSMA/CD</div>
+          <ul>
+            <li>CSMA/CD</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">8. CSMA/CA</div>
+          <ul>
+            <li>CSMA/CA</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">9. ALOHA</div>
+          <ul>
+            <li>Pure ALOHA</li>
+            <li>Slotted ALOHA</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">10. Switching Basics</div>
+          <ul>
+            <li>Switching basics</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">11. VLAN Basics</div>
+          <ul>
+            <li>VLAN basics</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================
+         UNIT 4
+    ========================== -->
+
+    <section class="simple-unit unit-4">
+
+      <div class="simple-unit-head">
+
+        <div>
+          <span class="simple-unit-label">UNIT 04</span>
+          <h3>UNIT 4 — NETWORK LAYER & IP</h3>
+        </div>
+
+        <a href="unit4.html" class="simple-unit-link">
+          Open Unit 4 →
+        </a>
+
+      </div>
+
+      <div class="simple-topics">
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">1. IP Addressing</div>
+          <ul>
+            <li>IPv4</li>
+            <li>IPv6</li>
+            <li>Public vs Private IP</li>
+            <li>Static vs Dynamic IP</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">2. IPv4 Address Classes</div>
+          <ul>
+            <li>Class A</li>
+            <li>Class B</li>
+            <li>Class C</li>
+            <li>Class D</li>
+            <li>Class E</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">3. Subnetting</div>
+          <ul>
+            <li>Subnet Mask</li>
+            <li>CIDR</li>
+            <li>Network ID</li>
+            <li>Host ID</li>
+            <li>Number of subnets</li>
+            <li>Number of hosts</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">4. Routing</div>
+          <ul>
+            <li>Static Routing</li>
+            <li>Dynamic Routing</li>
+            <li>Distance Vector</li>
+            <li>Link State</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">5. Routing Protocols</div>
+          <ul>
+            <li>RIP</li>
+            <li>OSPF</li>
+            <li>BGP basics</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">6. Network Layer Protocols</div>
+          <ul>
+            <li>IP</li>
+            <li>ICMP</li>
+            <li>ARP</li>
+            <li>RARP</li>
+            <li>DHCP</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">7. Packet / Datagram Basics</div>
+          <ul>
+            <li>Packet / Datagram basics</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">8. Routers and Their Function</div>
+          <ul>
+            <li>Router functions</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================
+         UNIT 5
+    ========================== -->
+
+    <section class="simple-unit unit-5">
+
+      <div class="simple-unit-head">
+        <div>
+          <span class="simple-unit-label">UNIT 05</span>
+          <h3>UNIT 5 — TRANSPORT LAYER</h3>
+        </div>
+
+        <a href="unit5.html" class="simple-unit-link">
+          Open Unit 5 →
+        </a>
+      </div>
+
+      <div class="simple-topics">
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">1. Transport Layer Functions</div>
+          <ul>
+            <li>Process-to-process delivery</li>
+            <li>Segmentation</li>
+            <li>Reassembly</li>
+            <li>Multiplexing</li>
+            <li>Demultiplexing</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">2. TCP</div>
+          <ul>
+            <li>Connection-oriented</li>
+            <li>3-way handshake</li>
+            <li>Connection termination</li>
+            <li>Sequence number</li>
+            <li>Acknowledgement</li>
+            <li>Flow control</li>
+            <li>Congestion control</li>
+            <li>Sliding window</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">3. UDP</div>
+          <ul>
+            <li>Connectionless</li>
+            <li>Features</li>
+            <li>Applications</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">4. TCP vs UDP</div>
+          <ul>
+            <li>TCP vs UDP</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">5. Ports</div>
+          <ul>
+            <li>Source port</li>
+            <li>Destination port</li>
+            <li>Well-known ports</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">6. Important Port Numbers</div>
+          <ul>
+            <li>FTP 20/21</li>
+            <li>SSH 22</li>
+            <li>Telnet 23</li>
+            <li>SMTP 25</li>
+            <li>DNS 53</li>
+            <li>DHCP 67/68</li>
+            <li>HTTP 80</li>
+            <li>POP3 110</li>
+            <li>IMAP 143</li>
+            <li>HTTPS 443</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================
+         UNIT 6
+    ========================== -->
+
+    <section class="simple-unit unit-6">
+
+      <div class="simple-unit-head">
+        <div>
+          <span class="simple-unit-label">UNIT 06</span>
+          <h3>UNIT 6 — APPLICATION LAYER & PROTOCOLS</h3>
+        </div>
+
+        <a href="unit6.html" class="simple-unit-link">
+          Open Unit 6 →
+        </a>
+      </div>
+
+      <div class="simple-topics">
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">1. Application Layer</div>
+          <ul>
+            <li>Functions</li>
+            <li>Client-Server Model</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">2. Web</div>
+          <ul>
+            <li>WWW</li>
+            <li>URL</li>
+            <li>Browser</li>
+            <li>HTTP</li>
+            <li>HTTPS</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">3. File Transfer</div>
+          <ul>
+            <li>FTP</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">4. Email</div>
+          <ul>
+            <li>SMTP</li>
+            <li>POP3</li>
+            <li>IMAP</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">5. DNS</div>
+          <ul>
+            <li>Domain Name</li>
+            <li>Name Resolution</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">6. DHCP</div>
+          <ul>
+            <li>DHCP</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">7. Remote Login</div>
+          <ul>
+            <li>Telnet</li>
+            <li>SSH</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">8. SNMP</div>
+          <ul>
+            <li>SNMP</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">9. Socket Basics</div>
+          <ul>
+            <li>Socket basics</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================
+         UNIT 7
+    ========================== -->
+
+    <section class="simple-unit unit-7">
+
+      <div class="simple-unit-head">
+        <div>
+          <span class="simple-unit-label">UNIT 07</span>
+          <h3>UNIT 7 — NETWORK SECURITY</h3>
+        </div>
+
+        <a href="unit7.html" class="simple-unit-link">
+          Open Unit 7 →
+        </a>
+      </div>
+
+      <div class="simple-topics">
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">1. Security Goals</div>
+          <ul>
+            <li>Confidentiality</li>
+            <li>Integrity</li>
+            <li>Availability</li>
+            <li>Authentication</li>
+            <li>Authorization</li>
+            <li>Non-repudiation</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">2. Threats</div>
+          <ul>
+            <li>Virus</li>
+            <li>Worm</li>
+            <li>Trojan</li>
+            <li>Phishing</li>
+            <li>Spoofing</li>
+            <li>Sniffing</li>
+            <li>DoS</li>
+            <li>DDoS</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">3. Cryptography</div>
+          <ul>
+            <li>Plaintext</li>
+            <li>Ciphertext</li>
+            <li>Encryption</li>
+            <li>Decryption</li>
+            <li>Symmetric</li>
+            <li>Asymmetric</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">4. Security Mechanisms</div>
+          <ul>
+            <li>Hashing</li>
+            <li>Digital Signature</li>
+            <li>Digital Certificate</li>
+            <li>Firewall</li>
+            <li>IDS</li>
+            <li>IPS</li>
+            <li>VPN</li>
+          </ul>
+        </div>
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">5. Basic Cyber Security Concepts</div>
+          <ul>
+            <li>Basic Cyber Security concepts</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =========================
+         UNIT 8
+    ========================== -->
+
+    <section class="simple-unit unit-8">
+
+      <div class="simple-unit-head">
+        <div>
+          <span class="simple-unit-label">UNIT 08</span>
+          <h3>UNIT 8 — EXAM-FOCUSED REVISION</h3>
+        </div>
+
+        <a href="unit8.html" class="simple-unit-link">
+          Open Unit 8 →
+        </a>
+      </div>
+
+      <div class="simple-topics">
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">
+            DSSSB TGT MUST-DO
+          </div>
+
+          <ul>
+            <li>OSI 7 layers + functions</li>
+            <li>TCP/IP model</li>
+            <li>Network devices</li>
+            <li>Topologies</li>
+            <li>Transmission media comparison</li>
+            <li>Error detection methods</li>
+            <li>CRC</li>
+            <li>Hamming code</li>
+            <li>CSMA/CD</li>
+            <li>CSMA/CA</li>
+            <li>Pure vs Slotted ALOHA</li>
+            <li>IP addressing</li>
+            <li>IPv4 classes</li>
+            <li>Subnetting</li>
+            <li>TCP 3-way handshake</li>
+            <li>TCP vs UDP</li>
+            <li>Important port numbers</li>
+            <li>HTTP vs HTTPS</li>
+            <li>FTP</li>
+            <li>SMTP / POP3 / IMAP</li>
+            <li>DNS</li>
+            <li>DHCP</li>
+            <li>ARP / RARP / ICMP</li>
+            <li>Network security basics</li>
+          </ul>
+        </div>
+
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">
+            FORMULAS / NUMERICALS
+          </div>
+
+          <ul>
+            <li>Transmission Delay = Data Size / Transmission Rate</li>
+            <li>Propagation Delay = Distance / Propagation Speed</li>
+            <li>Total Delay components</li>
+            <li>Bandwidth-Delay Product</li>
+            <li>Efficiency</li>
+            <li>Subnetting formulas</li>
+            <li>Number of hosts = 2^h − 2</li>
+            <li>Number of subnets = 2^n</li>
+          </ul>
+        </div>
+
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">
+            DIAGRAMS TO PRACTICE
+          </div>
+
+          <ul>
+            <li>OSI model</li>
+            <li>TCP/IP model</li>
+            <li>Network topologies</li>
+            <li>TCP 3-way handshake</li>
+            <li>TCP connection termination</li>
+            <li>IP packet format</li>
+            <li>Ethernet frame</li>
+            <li>CRC concept</li>
+            <li>Subnetting structure</li>
+          </ul>
+        </div>
+
+
+        <div class="simple-topic">
+          <div class="simple-topic-title">
+            QUESTION PATTERNS
+          </div>
+
+          <ul>
+            <li>Definition-based</li>
+            <li>Difference / comparison</li>
+            <li>Layer identification</li>
+            <li>Protocol identification</li>
+            <li>Device identification</li>
+            <li>Port number questions</li>
+            <li>Numerical questions</li>
+            <li>Match-the-following</li>
+            <li>Assertion / reasoning</li>
+            <li>Scenario-based questions</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+
+    <div id="noResults" class="no-results">
+      <strong>No matching topic found.</strong>
+      <div style="margin-top:5px;">
+        Try another keyword.
+      </div>
+    </div>
+
+  </main>
+
+
+  <footer class="footer">
+    <span>
+      Computer Networks · DSSSB TGT · Simple View
+    </span>
+
+    <span>
+      Quick revision across all 8 units
+    </span>
+  </footer>
+
+
+  <!-- =========================
+       JS
+  ========================== -->
+
+  <script>
+    // -------------------------
+    // DARK MODE
+    // -------------------------
+
+    const themeKey = "dsssb_cn_theme_v4";
+
+    function setTheme(isDark) {
+      document.body.classList.toggle("dark", isDark);
+
+      const button = document.getElementById("themeToggle");
+
+      if (button) {
+        button.textContent = isDark ? "☀" : "☾";
+      }
+
+      localStorage.setItem(
+        themeKey,
+        isDark ? "1" : "0"
+      );
+    }
+
+    const savedTheme =
+      localStorage.getItem(themeKey) === "1";
+
+    setTheme(savedTheme);
+
+    document
+      .getElementById("themeToggle")
+      ?.addEventListener("click", () => {
+        setTheme(
+          !document.body.classList.contains("dark")
+        );
+      });
+
+
+    // -------------------------
+    // SEARCH
+    // -------------------------
+
+    const searchInput =
+      document.getElementById("simpleSearch");
+
+    const units =
+      [...document.querySelectorAll(".simple-unit")];
+
+    const noResults =
+      document.getElementById("noResults");
+
+    searchInput.addEventListener("input", () => {
+
+      const query =
+        searchInput.value
+          .trim()
+          .toLowerCase();
+
+      let visibleUnits = 0;
+
+      units.forEach(unit => {
+
+        const text =
+          unit.innerText.toLowerCase();
+
+        const match =
+          query === "" || text.includes(query);
+
+        unit.classList.toggle(
+          "hidden",
+          !match
+        );
+
+        if (match) {
+          visibleUnits++;
+        }
+
+      });
+
+      noResults.classList.toggle(
+        "show",
+        visibleUnits === 0
+      );
+
+    });
+
+
+    // -------------------------
+    // PRINT
+    // -------------------------
+
+    document
+      .getElementById("printBtn")
+      ?.addEventListener("click", () => {
+        window.print();
+      });
+
+
+    // -------------------------
+    // CTRL + K SEARCH
+    // -------------------------
+
+    document.addEventListener("keydown", e => {
+
+      if (
+        (e.ctrlKey || e.metaKey) &&
+        e.key.toLowerCase() === "k"
+      ) {
+
+        e.preventDefault();
+
+        searchInput.focus();
+      }
+
+    });
+  </script>
+
+</body>
+</html>
