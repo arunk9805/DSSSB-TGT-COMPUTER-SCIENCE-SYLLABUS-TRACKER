@@ -4,7 +4,7 @@
 :root {
   --bg: #f4f7fb;
   --card: #fff;
-  --ink: #152033;
+  --ink: #151c33;
   --muted: #6d7b90;
   --line: #dfe6ee;
   --nav: #0e2348;
@@ -106,11 +106,11 @@ input {
 }
 .icon-btn,
 .back-btn {
+  color: #ffffff;
   height: 38px;
   border: 1px solid var(--line);
-  background: var(--card);
-  color: var(--ink);
-  padding: 0 12px;
+  background: rgb(11, 40, 229);
+  padding: 4px 12px;
   border-radius: 10px;
   cursor: pointer;
 }
